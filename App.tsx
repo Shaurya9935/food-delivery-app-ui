@@ -1,25 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-  import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { AuthProvider } from './src/context/AuthContext';
+import { CartProvider } from './src/context/CartContext';
+import RootNavigator from "./src/navigator/RootNavigator";
 
-
-function onBoardingPage() {
-
-}
+// Deep linking configuration
+const linking = {
+  prefixes: ['foodapp://'],
+  config: {
+    screens: {
+      MainDrawer: {
+        screens: {
+          MainTabs: {
+            screens: {
+              HomeTab: {
+                screens: {
+                  RestaurantDetail: {
+                    path: 'restaurant/:id',
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <CartProvider>
+        <NavigationContainer linking={linking as any}>
+          <RootNavigator />
+        </NavigationContainer>
+      </CartProvider>
+    </AuthProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

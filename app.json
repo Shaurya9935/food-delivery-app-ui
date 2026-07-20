@@ -2,6 +2,7 @@
   "expo": {
     "name": "food-delivery-app-ui",
     "slug": "food-delivery-app-ui",
+    "scheme": "foodapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
